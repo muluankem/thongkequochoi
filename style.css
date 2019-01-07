@@ -1,0 +1,27 @@
+a
+{
+	text-decoration: none;
+	font-weight: bold;
+	color: black;
+	curson: pointer;
+}
+a:hover
+{
+	color: red;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+} 
+th, td
+{
+	padding: 5px;
+}
+th
+{
+	background-color: red;
+	color: yellow;
+}
+
+
+
