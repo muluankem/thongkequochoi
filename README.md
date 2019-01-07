@@ -1,5 +1,5 @@
 # Thống kê Quốc hội
-[Một trang clone của mình](thongkequochoi.ga/index.php)
+[Một trang clone của mình](https://thongkequochoi.ga/index.php)
 
 Một lần nữa, trang này mình chỉ làm cho vui và phục vụ mục đích cá nhân. Mọi thống kê trong trang không có giá trị pháp lí.
 
