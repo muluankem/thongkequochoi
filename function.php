@@ -7,11 +7,11 @@
 		{
 			mysql_connect("localhost","root","");
 			mysql_select_db("quochoi");
-			error_reporting(0);
+			//error_reporting(0);
 		}
 		else
 		{
-			error_reporting(0);
+			//error_reporting(0);
 			mysql_select_db("quochoi");
 		}
 		mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
