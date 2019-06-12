@@ -3,18 +3,18 @@
 	
 	function connect()
 	{
-		if (!mysql_connect("localhost","root",""))
+		if (!mysqli_connect("localhost","root",""))
 		{
-			mysql_connect("localhost","root","");
-			mysql_select_db("quochoi");
+			mysqli_connect("localhost","root","");
+			mysqli_select_db("quochoi");
 			//error_reporting(0);
 		}
 		else
 		{
 			//error_reporting(0);
-			mysql_select_db("quochoi");
+			mysqli_select_db("quochoi");
 		}
-		mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
+		mysqli_query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
 	}
 	
 	function protect($string)
@@ -26,11 +26,11 @@
 	{
 		connect();
 		$sql="INSERT INTO $tablename (name) VALUES ('$idname')";
-		$res=mysql_query($sql) or die(mysql_error());
+		$res=mysqli_query($sql) or die(mysqli_error());
 		
 		$sql="SELECT id from $tablename WHERE name='$idname'";
-		$res=mysql_query($sql) or die(mysql_error());
-		$get=mysql_fetch_assoc($res);
+		$res=mysqli_query($sql) or die(mysqli_error());
+		$get=mysqli_fetch_assoc($res);
 
 		return $get['id'];
 	}
@@ -39,12 +39,12 @@
 	{
 		connect();
 		$sql="SELECT id from $tablename WHERE name='$idname'";
-		$res=mysql_query($sql) or die(mysql_error());
-		if (mysql_num_rows($res)==0)
+		$res=mysqli_query($sql) or die(mysqli_error());
+		if (mysqli_num_rows($res)==0)
 			return newID($tablename,$idname);
 		else
 		{
-			$get=mysql_fetch_assoc($res);
+			$get=mysqli_fetch_assoc($res);
 			if ($get['id']==401 or $get['id']==354 or $get['id']==441) return 252;
 			if ($get['id']==381) return 150;
 			return $get['id'];
@@ -55,12 +55,12 @@
 	{
 		connect();
 		$sql1="SELECT delegation from speech WHERE speaker=$idSpeaker";
-		$res1=mysql_query($sql1) or die(mysql_error());
-		$get1=mysql_fetch_assoc($res1);
+		$res1=mysqli_query($sql1) or die(mysqli_error());
+		$get1=mysqli_fetch_assoc($res1);
 		$idDelegation=$get1["delegation"];
 		$sql2="SELECT name from delegation WHERE id=$idDelegation";
-		$res2=mysql_query($sql2) or die(mysql_error());
-		$get2=mysql_fetch_assoc($res2);
+		$res2=mysqli_query($sql2) or die(mysqli_error());
+		$get2=mysqli_fetch_assoc($res2);
 		return mb_convert_encoding($get2["name"],"UTF-8");
 	}
 
@@ -68,8 +68,8 @@
 	{
 		connect();
 		$sql1="SELECT id FROM speech WHERE speaker=$idSpeaker";
-		$res1=mysql_query($sql1) or die(mysql_error());
-		return mysql_num_rows($res1);
+		$res1=mysqli_query($sql1) or die(mysqli_error());
+		return mysqli_num_rows($res1);
 	}
 
 	function updateSpeakTime($idSpeaker)
@@ -77,29 +77,29 @@
 		connect();
 		$speakTime=getSpeakTime($idSpeaker);
 		$sql1="UPDATE delegate SET score=$speakTime WHERE id=$idSpeaker";
-		$res1=mysql_query($sql1) or die(mysql_error());
+		$res1=mysqli_query($sql1) or die(mysqli_error());
 	}
 
 	function updateRank($idSpeaker,$rank)
 	{
 		connect();
 		$sql1="UPDATE delegate SET rank=$rank WHERE id=$idSpeaker";
-		$res1=mysql_query($sql1) or die(mysql_error());
+		$res1=mysqli_query($sql1) or die(mysqli_error());
 	}
 
 	function getName($table,$id)
 	{
 		$sql="SELECT name from $table WHERE id=$id";
-		$res=mysql_query($sql) or die(mysql_error());
-		$get=mysql_fetch_assoc($res);
+		$res=mysqli_query($sql) or die(mysqli_error());
+		$get=mysqli_fetch_assoc($res);
 		return mb_convert_encoding($get["name"],"UTF-8");
 	}
 
 	function printLink($table,$id)
 	{
 		$sql1="SELECT name from $table WHERE id=$id";
-		$res1=mysql_query($sql1) or die(mysql_error());
-		$get1=mysql_fetch_assoc($res1);
+		$res1=mysqli_query($sql1) or die(mysqli_error());
+		$get1=mysqli_fetch_assoc($res1);
 		?>
 		<a href="<?php echo $table; ?>.php?id=<?php echo $id; ?>"> <?php echo mb_convert_encoding($get1["name"],"UTF-8"); ?></a>
 		<?php
@@ -134,8 +134,8 @@
 	{
 		$ret="(0";
 		$sql="SELECT id from $table WHERE LOWER(name) LIKE LOWER('%$name%') COLLATE utf8_bin";
-		$res=mysql_query($sql) or die(mysql_error());
-		while ($get=mysql_fetch_assoc($res))
+		$res=mysqli_query($sql) or die(mysqli_error());
+		while ($get=mysqli_fetch_assoc($res))
 			$ret=$ret.",".$get["id"];
 		return $ret.")";
 	}
@@ -143,8 +143,8 @@
 	function printPage($sql,$page,$name)
 	{
 		echo "Trang: ";
-		$res=mysql_query($sql) or die(mysql_error());
-		$nPage=mysql_num_rows($res)/100+1;
+		$res=mysqli_query($sql) or die(mysqli_error());
+		$nPage=mysqli_num_rows($res)/100+1;
 		for ($i=1; $i<$nPage; $i++)
 		{
 			?>
