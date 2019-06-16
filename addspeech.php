@@ -44,7 +44,7 @@
 	}*/
 
 	$fin=fopen("input.txt","r") or die("Unable to open file!");
-	$fout=fopen("output.txt","w") or die("Unable to open file!");
+	//$fout=fopen("output.txt","w") or die("Unable to open file!");
 	$header=protect(fgets($fin));
 	$time=protect(fgets($fin));
 	$date=protect(fgets($fin));
