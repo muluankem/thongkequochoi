@@ -5,8 +5,8 @@
 	{
 		if (!mysql_connect("localhost","root",""))
 		{
-			mysql_connect("localhost","root","");
-			mysql_select_db("quochoi");
+			mysql_connect("sql107.freevnn.com","freev_24069978","6122000");
+			mysql_select_db("freev_24069978_quochoi");
 			error_reporting(0);
 		}
 		else
